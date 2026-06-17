@@ -9,25 +9,29 @@ struct Pos {
 
 fn main() {
     let data: String = fs::read_to_string("input3.txt").unwrap();
-    let mut cords: HashSet<Pos> = HashSet::new();
-    let mut pos = Pos::default();
-    let mut robot = Pos::default();
 
-    cords.insert(pos.clone());
-
-    for c in data.chars() {
-        match c {
-            '^' => pos.y += 1,
-            'v' => pos.y -= 1,
-            '>' => pos.x += 1,
-            '<' => pos.x -= 1,
-            _ => continue
-        }
+    for i in 1..=2 {
+        let mut cords: HashSet<Pos> = HashSet::new();
+        let mut pos = Pos::default();
+        let mut robot = Pos::default();
 
         cords.insert(pos.clone());
-        std::mem::swap(&mut pos, &mut robot); // Used for part 2
-    }
+        for c in data.chars() {
+            match c {
+                '^' => pos.y += 1,
+                'v' => pos.y -= 1,
+                '>' => pos.x += 1,
+                '<' => pos.x -= 1,
+                _ => continue
+            }
 
-    let size = cords.len();
-    println!("{size}")
+            cords.insert(pos.clone());
+            if i == 2 {
+                std::mem::swap(&mut pos, &mut robot); // Used for part 2
+            }
+        }
+
+        let size = cords.len();
+        println!("{size}")
+    }
 }
