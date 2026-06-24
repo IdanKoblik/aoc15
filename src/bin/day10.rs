@@ -1,6 +1,6 @@
 fn main() {
     let mut input = String::from("1321131112");
-
+    
     for i in 0..50 {
         let mut target = None;
         let mut count = 0;
